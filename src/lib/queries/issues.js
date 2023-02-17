@@ -4,8 +4,13 @@ export const headersGitHub = {
 export function getQueryIssues() {
     return `query Issues {
       repository(owner: "cmda-minor-web", name: "web-app-from-scratch-2223") {
+        name
         forks(first: 100) {
           nodes {
+            owner{
+              login
+            }
+            name
             nameWithOwner
             issues(first: 100) {
               nodes {
@@ -19,6 +24,7 @@ export function getQueryIssues() {
                 author {
                   login
                 }
+                url
               }
             }
           }
