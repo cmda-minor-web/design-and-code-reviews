@@ -1,15 +1,23 @@
 <script>
     export let data 
+
+    const name = prettyName(data.issues.repository.name)
+
+    function prettyName(name) {
+        return name.replace(/-/g, ' ').split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(' ')
+    } 
 </script>
 
 <main>
-    <h1><em>Issues</em> {data.issues.repository.name}</h1>
+    <h1><em>Issues</em> {name}</h1>
 
     <ul>
         {#each data.issues.repository.forks.nodes as fork}
 
             <li>
-                <a href="{fork.owner.url}">{fork.owner.login}</a>
+                <a href="{fork.owner.url}" class="owner"><img src="{fork.owner.avatarUrl}" alt="Avatar of {fork.owner.login}" width="50" height="50"><strong>{fork.owner.login}</strong></a>
 
                 <ul> 
                     {#each fork.issues.nodes as issue}
@@ -55,6 +63,17 @@
     }
     a:hover {
         text-decoration: none;
+    }
+    a img {
+        border-radius: 50%;
+    }
+    a.owner {
+        display:flex;
+        gap: .5rem;
+        align-items:flex-end;
+    }
+    a.owner strong {
+        margin-bottom: 0.5rem;
     }
     ul {
         list-style:none;

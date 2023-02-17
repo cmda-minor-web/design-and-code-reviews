@@ -10,6 +10,7 @@ export function getQueryIssues() {
             owner{
               login
               url
+              avatarUrl
             }
             name
             nameWithOwner
