@@ -3,7 +3,7 @@
 </script>
 
 <main>
-    <h1>{data.issues.repository.name} <em>Issues</em></h1>
+    <h1><em>Issues</em> {data.issues.repository.name}</h1>
 
     <ul>
         {#each data.issues.repository.forks.nodes as fork}
@@ -26,16 +26,25 @@
     </ul>
 </main>
 
+<aside>
+    <h2>Peer reviews</h2>
+
+    <p>These issues originate from <a href=""> peer reviews</a> between students of the <a href="https://everythingweb.org/">Minor Web Design & Development</a> and are based on the minor's <a href="https://github.com/cmda-minor-web/best-practices/">best practices</a>. </p>
+</aside>
+
 
 <style>
+    main {
+        background-color: var(--primary);
+    }
     h1 {
-        background-color: rgba(218, 180, 133, .1);
+        background-color: var(--quartiary);
         color:var(--primary);
         padding:.5rem;
         margin:0 0 2rem;
     }
     h1 em {
-        color: var(--secondary);
+        color: var(--light);
         text-shadow:none;
         font-style: normal;
     }
@@ -98,8 +107,12 @@
         padding:.25rem;
     }
 
-    svg {
-        flex-shrink: 0;
+    aside {
+        padding:.5rem;
+        background-color: var(--quartiary);
+        color:var(--primary);
+        color:var(--light);
+        margin-top: -1rem;
     }
 
 </style>
