@@ -4,9 +4,11 @@
     const name = prettyName(data.issues.repository.name)
 
     function prettyName(name) {
-        return name.replace(/-/g, ' ').split(' ').map(word => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ')
+        return name
+                .replace(/-/g, ' ')
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')
     } 
 </script>
 
@@ -15,7 +17,6 @@
 
     <ul>
         {#each data.issues.repository.forks.nodes as fork}
-
             <li>
                 <a href="{fork.owner.url}" class="owner"><img src="{fork.owner.avatarUrl}" alt="Avatar of {fork.owner.login}" width="50" height="50"><strong>{fork.owner.login}</strong></a>
 
