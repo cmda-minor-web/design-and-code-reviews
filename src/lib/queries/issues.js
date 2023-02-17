@@ -9,6 +9,7 @@ export function getQueryIssues() {
           nodes {
             owner{
               login
+              url
             }
             name
             nameWithOwner
