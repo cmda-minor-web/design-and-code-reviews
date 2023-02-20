@@ -1,7 +1,9 @@
 <script>
     export let data 
 
-    const name = prettyName(data.issues.repository.name)
+    console.log(data)
+
+    const name = prettyName(data.name)
 
     function prettyName(name) {
         return name
@@ -16,7 +18,7 @@
     <h1><em>Issues</em> {name}</h1>
 
     <ul>
-        {#each data.issues.repository.forks.nodes as fork}
+        {#each data.forks.nodes as fork}
             <li>
                 <a href="{fork.owner.url}" class="owner"><img src="{fork.owner.avatarUrl}" alt="Avatar of {fork.owner.login}" width="50" height="50"><strong>{fork.owner.login}</strong></a>
 
@@ -44,10 +46,10 @@
 
 <style>
     main {
-        background-color: var(--primary);
+        background-color: rgba(0,0,0,.1);
     }
     h1 {
-        background-color: var(--quartiary);
+        background-color: var(--secondary);
         color:var(--primary);
         padding:.5rem;
         margin:0 0 2rem;
@@ -58,7 +60,7 @@
         font-style: normal;
     }
     a {
-        color:var(--secondary);
+        color:var(--light);
         transition:.15s;
         transform-origin: center center;
     }
@@ -85,7 +87,7 @@
         flex-direction:column;
         margin: 1rem 0;
         padding-bottom:1rem;
-        border-bottom:3px dashed rgba(218, 180, 133, .1)
+        border-bottom:1px dashed var(--secondary)
     }
 
     ul ul {
@@ -108,7 +110,7 @@
         background-color:var(--tertiary);
         padding:.25rem;
         margin:0;
-        color: var(--primary);
+        color: var(--light);
         text-decoration:none;
         display:flex;
         align-items:center;
