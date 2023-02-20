@@ -1,6 +1,5 @@
 <script>
     export let data 
-
     const forks = Object.keys(data).map((key) => data[key])
     
     function prettyName(name) {
@@ -65,10 +64,7 @@
 
 <style>
     main {
-        background-color: rgba(0,0,0,.1);
-    }
-    article {
-        padding:.5rem
+
     }
     h1 {
         background-color: var(--secondary);
@@ -80,6 +76,18 @@
         color: var(--light);
         text-shadow:none;
         font-style: normal;
+    }
+    article {
+        padding:.5rem
+    }
+    article div {
+        background-color: rgba(0,0,0,.1);
+        padding: .5rem .5rem 0;
+        border-radius:.5rem;
+        margin: .5rem;
+    }
+    h3 {
+        margin:0 .5rem;
     }
     a {
         color:var(--light);
@@ -107,7 +115,7 @@
     li {
         display:flex;
         flex-direction:column;
-        margin: 1rem 0;
+        margin: .5rem 0;
         padding-bottom:1rem;
     }
 
@@ -128,14 +136,13 @@
 
     ul li a {
         border-radius:.5rem;
-        background-color:var(--tertiary);
-        padding:.25rem;
-        margin:0;
+        /background-color:var(--tertiary);
+        padding:.5rem;
         color: var(--light);
         text-decoration:none;
         display:flex;
-        align-items:center;
-        gap:.25rem;
+        align-items:flex-start;
+        gap:.5rem;
     }
 
 
@@ -145,9 +152,10 @@
     }
 
     a span:first-of-type {
-        border-radius:50%;
+        border-radius:.5rem;
         background-color: var(--secondary);
         padding:.25rem;
+        margin: -.25rem 0
     }
 
     aside {
