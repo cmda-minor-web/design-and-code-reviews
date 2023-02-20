@@ -36,35 +36,6 @@ export function getReceivedIssues() {
     `
 }
 
-// export function getSubmittedIssues() {
-//   return `query SubmittedIssues($ownerLogin: String!) {
-//     submittedIssues: issues(
-//       first: 100,
-//       states: [OPEN, CLOSED],
-//       filterBy: {
-//         author: $ownerLogin,
-//         repository: { isFork: true, parent: "cmda-minor-web/web-app-from-scratch-2223" }
-//       }
-//     ) {
-//       totalCount
-//       nodes {
-//         number
-//         title
-//         body
-//         createdAt
-//         updatedAt
-//         closed
-//         closedAt
-//         author {
-//           login
-//         }
-//         url
-//       }
-//     }
-//     }
-//     `
-// }
-
 export function getSubmittedIssues(){
   return `query SearchIssues($queryString: String!) {
     search(query: $queryString, type: ISSUE, first: 100) {
@@ -85,6 +56,10 @@ export function getSubmittedIssues(){
             url
             repository {
               nameWithOwner
+              isFork
+              parent {
+                nameWithOwner
+              }
             }
           }
         }

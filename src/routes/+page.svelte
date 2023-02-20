@@ -1,10 +1,8 @@
 <script>
     export let data 
 
-    console.log(data)
-
-    const name = prettyName(data.name)
-
+    const forks = Object.keys(data).map((key) => data[key])
+    
     function prettyName(name) {
         return name
                 .replace(/-/g, ' ')
@@ -15,26 +13,43 @@
 </script>
 
 <main>
-    <h1><em>Issues</em> {name}</h1>
+    <h1>Issues <em>Web App From Scratch</em></h1>
+    {#each forks as fork}
 
-    <ul>
-        {#each data.forks.nodes as fork}
-            <li>
-                <a href="{fork.owner.url}" class="owner"><img src="{fork.owner.avatarUrl}" alt="Avatar of {fork.owner.login}" width="50" height="50"><strong>{fork.owner.login}</strong></a>
+    <article>
+        <h2><a href="{fork.ownerUrl}" class="owner"><img src="{fork.avatar}" alt="Avatar of {fork.owner}" width="50" height="50"><strong>{fork.owner}</strong></a></h2>
 
-                <ul> 
-                    {#each fork.issues.nodes as issue}
-                        <li>    
-                            <a href="{issue.url}">
-                                <span>#{issue.number}</span>
-                                <span>{issue.title}</span>
-                            </a>
-                        </li>
-                    {/each}
-                </ul>
-            </li>
-        {/each}
-    </ul>
+        <h3>Received</h3>
+        {#if fork.receivedIssues.length < 1}
+            <p>No issues received</p>
+        {/if}
+        <ul>
+            {#each fork.receivedIssues as issue}
+                <li>
+                    <a href="{issue.url}">
+                        <span>#{issue.number}</span>
+                        <span>{issue.title}</span>
+                    </a>
+                </li>
+            {/each}
+        </ul>
+
+        <h3>Submitted</h3>
+        {#if fork.submittedIssues.length < 1}
+            <p>No issues submitted</p>
+        {/if}
+        <ul>
+            {#each fork.submittedIssues as issue}
+                <li>
+                    <a href="{issue.node.url}">
+                        <span>#{issue.node.number}</span>
+                        <span>{issue.node.title}</span>
+                    </a>
+                </li>
+            {/each}
+        </ul>
+    </article>
+    {/each}
 </main>
 
 <aside>
@@ -47,6 +62,9 @@
 <style>
     main {
         background-color: rgba(0,0,0,.1);
+    }
+    article {
+        padding:.5rem
     }
     h1 {
         background-color: var(--secondary);
@@ -87,10 +105,9 @@
         flex-direction:column;
         margin: 1rem 0;
         padding-bottom:1rem;
-        border-bottom:1px dashed var(--secondary)
     }
 
-    ul ul {
+    ul {
         display:flex;
         flex-direction: row;
         gap: .5rem;
@@ -99,13 +116,13 @@
         flex-wrap:wrap;
     }
 
-    ul ul li {
+    ul li {
         margin: 0;
         border-bottom:none;
         padding-bottom: 0;
     }
 
-    ul ul li a {
+    ul li a {
         border-radius:.5rem;
         background-color:var(--tertiary);
         padding:.25rem;
@@ -118,7 +135,7 @@
     }
 
 
-    ul ul li a:hover {
+    ul li a:hover {
         transform: scale(1.03);
         background-color: var(--secondary);
     }
@@ -131,7 +148,7 @@
 
     aside {
         padding:.5rem;
-        background-color: var(--quartiary);
+        background-color: var(--primary);
         color:var(--primary);
         color:var(--light);
         margin-top: -1rem;
