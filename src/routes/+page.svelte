@@ -18,36 +18,40 @@
 
     <article>
         <h2><a href="{fork.ownerUrl}" class="owner"><img src="{fork.avatar}" alt="Avatar of {fork.owner}" width="50" height="50"><strong>{fork.owner}</strong></a></h2>
-
-        <h3>Received</h3>
-        {#if fork.receivedIssues.length < 1}
-            <p>No issues received</p>
-        {/if}
-        <ul>
-            {#each fork.receivedIssues as issue}
-                <li>
-                    <a href="{issue.url}">
-                        <span>#{issue.number}</span>
-                        <span>{issue.title}</span>
-                    </a>
-                </li>
-            {/each}
-        </ul>
-
-        <h3>Submitted</h3>
-        {#if fork.submittedIssues.length < 1}
-            <p>No issues submitted</p>
-        {/if}
-        <ul>
-            {#each fork.submittedIssues as issue}
-                <li>
-                    <a href="{issue.node.url}">
-                        <span>#{issue.node.number}</span>
-                        <span>{issue.node.title}</span>
-                    </a>
-                </li>
-            {/each}
-        </ul>
+        <div>
+            <h3>Received</h3>
+            {#if fork.receivedIssues.length < 1}
+                <p>No issues received</p>
+            {/if}
+            <ul>
+                {#each fork.receivedIssues as issue}
+                    <li>
+                        <a href="{issue.url}">
+                            <span>#{issue.number}</span>
+                            <span>{issue.title}</span>
+                        </a>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+        
+        <div>
+            <h3>Submitted</h3>
+            {#if fork.submittedIssues.length < 1}
+                <p>No issues submitted</p>
+            {/if}
+            <ul>
+                {#each fork.submittedIssues as issue}
+                    <li>
+                        <a href="{issue.node.url}">
+                            <span>#{issue.node.number}</span>
+                            <span>{issue.node.title}</span>
+                        </a>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+        
     </article>
     {/each}
 </main>
@@ -152,6 +156,17 @@
         color:var(--primary);
         color:var(--light);
         margin-top: -1rem;
+    }
+
+    @media (min-width:45em) {
+        main article {
+            display:grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem
+        }
+        h2 {
+            grid-column: 1 / -1;
+        }
     }
 
 </style>
