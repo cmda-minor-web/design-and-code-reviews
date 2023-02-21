@@ -17,7 +17,7 @@ function getIssues(repo){
             return edge.node.author.login == node.owner.login 
                     && edge.node.repository.parent 
                     && edge.node.repository.parent.nameWithOwner.includes('web-app-from-scratch-2223')
-        })
+        }).sort((a, b) => (a.node.number > b.node.number) ? 1 : -1)
 
         return {
             name:node.name,

@@ -24,7 +24,7 @@
             {/if}
             <ul>
                 {#each fork.receivedIssues as issue}
-                    <li>
+                    <li class:closed="{issue.closed}">
                         <a href="{issue.url}">
                             <span>#{issue.number}</span>
                             <span>{issue.title}</span>
@@ -41,7 +41,7 @@
             {/if}
             <ul>
                 {#each fork.submittedIssues as issue}
-                    <li>
+                    <li class:closed="{issue.node.closed}">
                         <a href="{issue.node.url}">
                             <span>#{issue.node.number}</span>
                             <span>{issue.node.title}</span>
@@ -87,8 +87,12 @@
         margin: .5rem;
     }
     h3 {
-        margin:0 .5rem;
+        margin:.5rem;
     }
+    p {
+        margin:1.5rem  .5rem;
+    }
+
     a {
         color:var(--light);
         transition:.15s;
@@ -118,6 +122,10 @@
         margin: .5rem 0;
         padding-bottom:1rem;
     }
+    li.closed {
+        text-decoration: line-through;
+        opacity:.5
+    }
 
     ul {
         display:flex;
@@ -136,7 +144,6 @@
 
     ul li a {
         border-radius:.5rem;
-        /background-color:var(--tertiary);
         padding:.5rem;
         color: var(--light);
         text-decoration:none;
@@ -147,7 +154,6 @@
 
 
     ul li a:hover {
-        transform: scale(1.03);
         background-color: var(--secondary);
     }
 
